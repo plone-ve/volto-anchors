@@ -19,6 +19,7 @@ const TextBlockView = (props) => {
         const text = serializeNodesToText(node?.children || []);
         const slug = Slugger.slug(text);
         res.id = slug || id;
+        res['data-block'] = id;
       }
     }
     return res;
