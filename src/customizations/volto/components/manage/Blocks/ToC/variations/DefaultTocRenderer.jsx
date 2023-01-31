@@ -13,8 +13,10 @@ import Slugger from 'github-slugger';
 
 const RenderListItems = ({ items, data }) => {
   return map(items, (item) => {
-    const { id, level, title } = item;
-    const slug = Slugger.slug(title) || id;
+    const { id, level, title, override_toc, plaintext } = item;
+    const slug = override_toc
+      ? Slugger.slug(plaintext)
+      : Slugger.slug(title) || id;
     return (
       item && (
         <List.Item key={id} className={`item headline-${level}`} as="li">
