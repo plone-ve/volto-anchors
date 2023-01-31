@@ -58,7 +58,7 @@ const View = (props) => {
         tocEntriesLayout.push(id);
         tocEntries[id] = {
           level,
-          title: title,
+          title: title || block.plaintext,
           items,
           id,
           override_toc: block.override_toc,
