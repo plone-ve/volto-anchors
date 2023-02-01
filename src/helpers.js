@@ -14,6 +14,29 @@ export const serializeText = (text) => {
   return isArray(text) ? serializeNodes(text) : text;
 };
 
+export const openAccordionIfContainsAnchors = (anchor) => {
+  if (typeof window !== 'undefined') {
+    const anchorElement = document.querySelector(anchor);
+    if (
+      anchorElement !== null &&
+      anchorElement.closest('.accordion') !== null
+    ) {
+      const comp = anchorElement.closest('.accordion').querySelector('.title');
+      if (!comp.className.includes('active')) {
+        comp.click();
+      }
+    }
+    // if (anchorElement !== null && anchorElement.closest('.tabs') !== null) {
+    //   const comp = anchorElement.closest('.tabs').querySelector('.item');
+    //   if (!comp.className.includes('active')) {
+    //     comp.click();
+    //   }
+    // }
+  }
+
+  return true;
+};
+
 export const renderLinkElement = (tagName) => {
   function LinkElement({
     attributes,
