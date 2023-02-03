@@ -41,7 +41,7 @@ export const scrollToTarget = (target, offsetHeight = 0) => {
 
   window.scrollTo({
     top: targetPosition,
-    behavior: 'auto',
+    behavior: 'smooth',
   });
 
   return;
