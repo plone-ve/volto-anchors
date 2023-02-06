@@ -1,4 +1,5 @@
 import { isArray } from 'lodash';
+import Slugger from 'github-slugger';
 import config from '@plone/volto/registry';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { UniversalLink } from '@plone/volto/components';
@@ -14,6 +15,9 @@ export const createSlateParagraph = (text) => {
 export const serializeText = (text) => {
   return isArray(text) ? serializeNodes(text) : text;
 };
+
+export const toSlug = (url) => Slugger.slug(url);
+
 export const waitForElm = (selector) => {
   return new Promise((resolve) => {
     if (document.querySelector(selector)) {
