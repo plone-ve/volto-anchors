@@ -85,17 +85,12 @@ export const visitBlocks = (content, callback) => {
 };
 
 export const renderLinkElement = (tagName) => {
-  function LinkElement({
-    attributes,
-    children,
-    mode = 'edit',
-    className = null,
-  }) {
+  function LinkElement({ attributes, children, mode = 'edit', className }) {
     const Tag = tagName;
     const slug = attributes.id || '';
 
     return (
-      <Tag {...attributes} className={className}>
+      <Tag className={className} {...attributes}>
         {mode === 'view' && slug && (
           <UniversalLink
             className="anchor"
