@@ -1,3 +1,4 @@
+import ScrollToAnchor from './components/ScrollToAnchor';
 import { renderLinkElement } from './helpers';
 
 const applyConfig = (config) => {
@@ -8,6 +9,14 @@ const applyConfig = (config) => {
     h3: renderLinkElement('h3'),
     h4: renderLinkElement('h4'),
   };
+
+  config.settings.appExtras = [
+    ...(config.settings.appExtras || []),
+    {
+      match: '',
+      component: ScrollToAnchor,
+    },
+  ];
   return config;
 };
 

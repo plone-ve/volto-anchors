@@ -1,7 +1,9 @@
 import { isArray } from 'lodash';
+import Slugger from 'github-slugger';
 import config from '@plone/volto/registry';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { UniversalLink } from '@plone/volto/components';
+import { getBlocks } from '@plone/volto/helpers/Blocks/Blocks';
 import linkSVG from '@plone/volto/icons/link.svg';
 
 import './less/slate-anchors.less';
@@ -12,6 +14,74 @@ export const createSlateParagraph = (text) => {
 
 export const serializeText = (text) => {
   return isArray(text) ? serializeNodes(text) : text;
+};
+
+export const toSlug = (url) => Slugger.slug(url);
+
+export const waitForElm = (selector) => {
+  return new Promise((resolve) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      if (document.querySelector(selector)) {
+        resolve(document.querySelector(selector));
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
+};
+
+export const scrollToTarget = (target, offsetHeight = 0) => {
+  const bodyRect = document.body.getBoundingClientRect().top;
+  const targetRect = target.getBoundingClientRect().top;
+  const targetPosition = targetRect - bodyRect - offsetHeight;
+
+  window.scrollTo({
+    top: targetPosition,
+    behavior: 'smooth',
+  });
+
+  return;
+};
+
+export const openAccordionIfContainsAnchors = (anchor) => {
+  waitForElm(anchor).then((elm) => {
+    if (elm.closest('.accordion')) {
+      const comp = elm.closest('.accordion')?.querySelector('.title');
+      if (!comp?.className?.includes('active')) {
+        comp.click();
+        setTimeout(() => scrollToTarget(elm), 300);
+      }
+    }
+  });
+
+  return;
+};
+
+//post order traversal of blocks content
+
+export const visitBlocks = (content, callback) => {
+  const stack = getBlocks(content);
+  while (stack.length > 0) {
+    const [id, blockdata] = stack.pop();
+    const wantBreak = callback([id, blockdata]);
+    if (wantBreak) break;
+    // assumes that a block value is like: {blocks, blocks_layout} or
+    // { data: {blocks, blocks_layout}}
+    if (Object.keys(blockdata || {}).indexOf('blocks') > -1) {
+      stack.push(...getBlocks(blockdata));
+    }
+    if (Object.keys(blockdata?.data || {}).indexOf('blocks') > -1) {
+      stack.push(...getBlocks(blockdata.data));
+    }
+  }
 };
 
 export const renderLinkElement = (tagName) => {
