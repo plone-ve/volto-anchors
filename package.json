@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-anchors",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "@eeacms/volto-anchors: Volto add-on",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -15,6 +15,9 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:eea/volto-anchors.git"
+  },
+  "dependencies": {
+    "github-slugger": "1.4.0"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
