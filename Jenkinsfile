@@ -4,7 +4,7 @@ pipeline {
   environment {
         GIT_NAME = "volto-anchors"
         NAMESPACE = "@eeacms"
-        SONARQUBE_TAGS = "volto.eea.europa.eu,demo-www.eea.europa.eu,prod-www.eea.europa.eu,biodiversity.europa.eu,www.eea.europa.eu-ims,demo-kitkat.dev2aws.eea.europa.eu,clmsdemo.devel6cph.eea.europa.eu,climate-advisory-board.europa.eu,forest.eea.europa.eu,climate-adapt.eea.europa.eu,www.eea.europa.eu-en,circularity.eea.europa.eu,water.europa.eu-marine"
+        SONARQUBE_TAGS = "volto.eea.europa.eu,demo-www.eea.europa.eu,biodiversity.europa.eu,www.eea.europa.eu-ims,clmsdemo.devel6cph.eea.europa.eu,climate-advisory-board.europa.eu,forest.eea.europa.eu,climate-adapt.eea.europa.eu,www.eea.europa.eu-en,circularity.eea.europa.eu,water.europa.eu-marine,industry.eea.europa.eu"
         DEPENDENCIES = ""
         VOLTO = ""
     }
