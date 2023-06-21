@@ -47,5 +47,5 @@ export default connect(
   (state, props) => ({
     location: state.loadProtector.location,
   }),
-  {},
+  {}
 )(ScrollToTop);

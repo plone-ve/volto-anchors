@@ -31,7 +31,7 @@ const View = (props) => {
       data.levels?.length > 0
         ? data.levels.map((l) => parseInt(l.slice(1)))
         : [1, 2, 3, 4, 5, 6],
-    [data],
+    [data]
   );
   const tocEntries = React.useMemo(() => {
     let rootLevel = Infinity;
@@ -48,7 +48,7 @@ const View = (props) => {
       if (!config.blocks.blocksConfig[block['@type']]?.tocEntry) return null;
       const entry = config.blocks.blocksConfig[block['@type']]?.tocEntry(
         block,
-        data,
+        data
       );
       if (entry) {
         const level = entry[0];

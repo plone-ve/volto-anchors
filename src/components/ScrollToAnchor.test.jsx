@@ -36,7 +36,7 @@ describe('ScrollToAnchor', () => {
     const component = renderer.create(
       <Provider store={store}>
         <ScrollToAnchor />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
@@ -46,7 +46,7 @@ describe('ScrollToAnchor', () => {
     render(
       <Provider store={store}>
         <ScrollToAnchor />
-      </Provider>,
+      </Provider>
     );
     expect(openAccordionIfContainsAnchors).toHaveBeenCalledWith('#anchor');
   });
@@ -68,7 +68,7 @@ describe('ScrollToAnchor', () => {
     render(
       <Provider store={newStore}>
         <ScrollToAnchor />
-      </Provider>,
+      </Provider>
     );
     expect(openAccordionIfContainsAnchors).toHaveBeenCalledWith('#anchor');
   });
@@ -91,7 +91,7 @@ describe('ScrollToAnchor', () => {
     render(
       <Provider store={newStore}>
         <ScrollToAnchor />
-      </Provider>,
+      </Provider>
     );
     expect(openAccordionIfContainsAnchors).not.toHaveBeenCalled();
   });

@@ -124,7 +124,7 @@ describe('waitForElm', () => {
     const mockElement = {};
 
     document.querySelector = jest.fn((selector) =>
-      selector === '.test' ? mockElement : null,
+      selector === '.test' ? mockElement : null
     );
     // we need to mock the querySelector twice, because the first time it will return null (not added to the DOM)
     // and the second time it will return the mockElement (added to the DOM)
@@ -220,7 +220,7 @@ describe('renderLinkElement', () => {
   it('renders a link element with children and default props', () => {
     const TestComponent = helpers.renderLinkElement('div');
     const component = renderer.create(
-      <TestComponent attributes={{ id: 'test' }}>Test test</TestComponent>,
+      <TestComponent attributes={{ id: 'test' }}>Test test</TestComponent>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
@@ -232,7 +232,7 @@ describe('renderLinkElement', () => {
     const component = renderer.create(
       <TestComponent className="test-class" attributes={{ id: 'test' }}>
         Test test
-      </TestComponent>,
+      </TestComponent>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
@@ -252,7 +252,7 @@ describe('renderLinkElement', () => {
             Test test
           </TestComponent>
         </Router>
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();

@@ -23,7 +23,7 @@ describe('ScrollToTop component', () => {
         <ScrollToTop>
           <div>test</div>
         </ScrollToTop>
-      </Provider>,
+      </Provider>
     );
 
     const newStore = mockStore({
@@ -39,7 +39,7 @@ describe('ScrollToTop component', () => {
         <ScrollToTop>
           <div>test</div>
         </ScrollToTop>
-      </Provider>,
+      </Provider>
     );
     expect(window.scrollTo).toHaveBeenCalled();
   });
@@ -60,7 +60,7 @@ describe('ScrollToTop component', () => {
         <ScrollToTop>
           <div>test</div>
         </ScrollToTop>
-      </Provider>,
+      </Provider>
     );
 
     const newStore = mockStore({
@@ -76,7 +76,7 @@ describe('ScrollToTop component', () => {
         <ScrollToTop>
           <div>test</div>
         </ScrollToTop>
-      </Provider>,
+      </Provider>
     );
     expect(window.scrollTo).not.toHaveBeenCalled();
   });

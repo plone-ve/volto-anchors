@@ -86,7 +86,7 @@ describe('View', () => {
           mode="edit"
           data={{ levels: [] }}
         />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
@@ -108,7 +108,7 @@ describe('View', () => {
             id: 'variation-id',
           }}
         />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
@@ -119,7 +119,7 @@ describe('View', () => {
     const component = renderer.create(
       <Provider store={store}>
         <View properties={properties} mode="edit" data={{ levels: [] }} />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
@@ -148,7 +148,7 @@ describe('View', () => {
     const component = renderer.create(
       <Provider store={store}>
         <View properties={properties1} mode="edit" data={{ levels: [] }} />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
@@ -171,7 +171,7 @@ describe('View', () => {
     const component = renderer.create(
       <Provider store={store}>
         <View properties={properties1} mode="edit" data={{ levels: [] }} />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
@@ -182,7 +182,7 @@ describe('View', () => {
     const component = renderer.create(
       <Provider store={store}>
         <View {...mockPropsNested} />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
