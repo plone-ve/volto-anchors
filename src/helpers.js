@@ -88,8 +88,13 @@ export const renderLinkElement = (tagName) => {
   function LinkElement({ attributes, children, mode = 'edit', className }) {
     const Tag = tagName;
     const slug = attributes.id || '';
+    const { slate = {} } = config.settings;
 
-    return (
+    return slate.useLinkedHeadings === false ? (
+      <Tag className={className} {...attributes}>
+        {children}
+      </Tag>
+    ) : (
       <Tag className={className} {...attributes}>
         {mode === 'view' && slug && (
           <UniversalLink
