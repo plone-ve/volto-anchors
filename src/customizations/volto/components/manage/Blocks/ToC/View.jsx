@@ -9,11 +9,10 @@ import { injectIntl } from 'react-intl';
 import cx from 'classnames';
 import { Message } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-import { withBlockExtensions } from '@plone/volto/helpers';
-
 import {
   getBlocksFieldname,
   getBlocksLayoutFieldname,
+  withBlockExtensions,
 } from '@plone/volto/helpers';
 
 /**
