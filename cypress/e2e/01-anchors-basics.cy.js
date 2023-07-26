@@ -80,6 +80,7 @@ describe('Block Tests: Anchors', () => {
     cy.get('.button.toc').click();
     cy.get('#sidebar-properties .form .react-select-container').first().click();
     cy.contains('Horizontal Menu').click();
+    cy.contains('Sticky').click();
 
     // Add headings
     cy.get('.ui.drag.block.inner.slate')
@@ -146,6 +147,45 @@ describe('Block Tests: Anchors', () => {
     });
     cy.get('.ui.drag.block.inner.slate').eq(4).click().type('{enter}');
 
+    cy.get('.ui.drag.block.inner.slate')
+      .eq(5)
+      .click()
+      .type('Lorem ipsum dolor sit amet')
+      .click();
+    cy.get('.ui.drag.block.inner.slate span span span')
+      .eq(5)
+      .setSelection('Lorem ipsum dolor sit amet');
+    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
+      force: true,
+    });
+    cy.get('.ui.drag.block.inner.slate').eq(5).click().type('{enter}');
+
+    cy.get('.ui.drag.block.inner.slate')
+      .eq(6)
+      .click()
+      .type('Lorem ipsum dolor sit amet')
+      .click();
+    cy.get('.ui.drag.block.inner.slate span span span')
+      .eq(6)
+      .setSelection('Lorem ipsum dolor sit amet');
+    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
+      force: true,
+    });
+    cy.get('.ui.drag.block.inner.slate').eq(6).click().type('{enter}');
+
+    cy.get('.ui.drag.block.inner.slate')
+      .eq(7)
+      .click()
+      .type('Lorem ipsum dolor sit amet')
+      .click();
+    cy.get('.ui.drag.block.inner.slate span span span')
+      .eq(7)
+      .setSelection('Lorem ipsum dolor sit amet');
+    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
+      force: true,
+    });
+    cy.get('.ui.drag.block.inner.slate').eq(7).click().type('{enter}');
+
     // Save page
     cy.get('#toolbar-save').click();
     cy.url().should('eq', Cypress.config().baseUrl + '/cypress/my-page');
@@ -156,6 +196,7 @@ describe('Block Tests: Anchors', () => {
 
     // Ensure that the dropdown menu is visible
     cy.get('.menu.transition').should('be.visible');
+    cy.get('body').type('{downArrow}');
     cy.get('body').type('{downArrow}');
 
     // Verify that the item from the dropdown menu is focused
