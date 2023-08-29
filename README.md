@@ -18,7 +18,7 @@
 
 ## Features
 
-![Anchors](https://github.com/eea/volto-anchors/raw/develop/docs/volto-anchors.gif)
+![Anchors](https://raw.githubusercontent.com/eea/volto-anchors/master/docs/volto-anchors.gif)
 
 ## Getting started
 
