@@ -2,7 +2,9 @@ pipeline {
   agent {
     node { label 'docker-host' }
   }
-
+  tools {
+    jdk 'Java17'
+  }
   environment {
     GIT_NAME = "volto-anchors"
     NAMESPACE = "@eeacms"
@@ -230,9 +232,6 @@ pipeline {
             }
           }
         }
-      }
-      tools {
-        jdk 'Java17' 
       }
       steps {
         script {
