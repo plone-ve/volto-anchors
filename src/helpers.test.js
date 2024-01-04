@@ -17,14 +17,6 @@ const store = mockStore({
   },
 });
 
-jest.mock('@plone/volto/registry', () => ({
-  settings: {
-    slate: {
-      defaultValue: jest.fn(),
-    },
-  },
-}));
-
 jest.mock('@plone/volto-slate/editor/render', () => ({
   serializeNodes: jest.fn(),
 }));
@@ -36,8 +28,8 @@ describe('createSlateParagraph', () => {
 
   it('should return default value when input is not an array', () => {
     const input = 'test';
-    helpers.createSlateParagraph(input);
-    expect(config.settings.slate.defaultValue).toHaveBeenCalledTimes(1);
+    const slate = helpers.createSlateParagraph(input);
+    expect(slate).toEqual(config.settings.slate.defaultValue('test'));
   });
 
   it('should return input when input is an array', () => {
