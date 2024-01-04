@@ -25,8 +25,8 @@ global.store = mockStore({
   },
 });
 
-const mockSemanticComponents = jest.requireActual('semantic-ui-react');
-const mockComponents = jest.requireActual('@plone/volto/components');
+var mockSemanticComponents = jest.requireActual('semantic-ui-react');
+var mockComponents = jest.requireActual('@plone/volto/components');
 
 jest.mock('semantic-ui-react', () => ({
   ...mockSemanticComponents,
