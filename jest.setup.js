@@ -5,13 +5,6 @@ import config from '@plone/volto/registry';
 import { blocksConfig } from '@plone/volto/config/Blocks';
 import installSlate from '@plone/volto-slate/index';
 
-config.blocks.blocksConfig = {
-  ...blocksConfig,
-  ...config.blocks.blocksConfig,
-};
-
-[installSlate].reduce((acc, apply) => apply(acc), config);
-
 const mockStore = configureStore([thunk]);
 
 global.store = mockStore({
@@ -60,3 +53,10 @@ global.fetch = jest.fn(() =>
     json: () => Promise.resolve({}),
   }),
 );
+
+config.blocks.blocksConfig = {
+  ...blocksConfig,
+  ...config.blocks.blocksConfig,
+};
+
+[installSlate].reduce((acc, apply) => apply(acc), config);
