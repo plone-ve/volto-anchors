@@ -7,16 +7,6 @@ import config from '@plone/volto/registry';
 
 const mockStore = configureStore();
 
-jest.mock('@plone/volto/registry', () => ({
-  blocks: {
-    blocksConfig: {
-      blockType: {
-        tocEntry: jest.fn(),
-      },
-    },
-  },
-}));
-
 config.blocks.blocksConfig = {
   typeA: {
     tocEntry: () => [1, 'Title A'],
