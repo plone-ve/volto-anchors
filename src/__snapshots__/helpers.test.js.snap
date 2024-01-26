@@ -11,8 +11,6 @@ exports[`renderLinkElement renders a UniversalLink when mode is set to view 1`] 
     href="/#test"
     onClick={[Function]}
     tabIndex={-1}
-    target={null}
-    title={null}
   >
     <svg
       dangerouslySetInnerHTML={
