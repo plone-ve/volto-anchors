@@ -16,7 +16,7 @@ const TextBlockView = (props) => {
     const res = { ...styling };
     if (node.type && isEqual(path, [0])) {
       if (topLevelTargetElements.includes(node.type) || override_toc) {
-        const text = serializeNodesToText(node?.children || []);
+        const text = serializeNodesToText([node] || []);
         const slug = Slugger.slug(text);
         res.id = slug || id;
         res['data-block'] = id;

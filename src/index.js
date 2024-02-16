@@ -1,5 +1,6 @@
 import ScrollToAnchor from './components/ScrollToAnchor';
 import { renderLinkElement } from './helpers';
+import tocVariations from './customizations/volto/components/manage/Blocks/ToC/variations';
 
 const applyConfig = (config) => {
   config.settings.slate.useLinkedHeadings = true;
@@ -20,6 +21,11 @@ const applyConfig = (config) => {
       },
     ];
   }
+
+  config.blocks.blocksConfig.toc = {
+    ...config.blocks.blocksConfig.toc,
+    variations: tocVariations,
+  };
   return config;
 };
 
