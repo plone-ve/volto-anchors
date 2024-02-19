@@ -2,7 +2,7 @@ import { isArray } from 'lodash';
 import Slugger from 'github-slugger';
 import config from '@plone/volto/registry';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
-import { UniversalLink } from '@plone/volto/components';
+import { Link } from 'react-router-dom';
 import { getBlocks } from '@plone/volto/helpers/Blocks/Blocks';
 import linkSVG from '@plone/volto/icons/link.svg';
 
@@ -97,11 +97,11 @@ export const renderLinkElement = (tagName) => {
     ) : (
       <Tag className={className} {...attributes}>
         {mode === 'view' && slug && (
-          <UniversalLink
+          <Link
             className="anchor"
             aria-hidden="true"
             tabIndex={-1}
-            href={`#${slug}`}
+            to={`#${slug}`}
           >
             <svg
               {...linkSVG.attributes}
@@ -109,7 +109,7 @@ export const renderLinkElement = (tagName) => {
               width="2em"
               height={null}
             ></svg>
-          </UniversalLink>
+          </Link>
         )}
         {children}
       </Tag>
