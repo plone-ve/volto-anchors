@@ -5,7 +5,6 @@ import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { Link } from 'react-router-dom';
 import { getBlocks } from '@plone/volto/helpers/Blocks/Blocks';
 import linkSVG from '@plone/volto/icons/link.svg';
-
 import './less/slate-anchors.less';
 
 export const createSlateParagraph = (text) => {
@@ -15,6 +14,10 @@ export const createSlateParagraph = (text) => {
 export const serializeText = (text) => {
   return isArray(text) ? serializeNodes(text) : text;
 };
+
+function removeSpecialCharacters(str) {
+  return str.replace(/[^a-zA-Z0-9]/g, '');
+}
 
 export const toSlug = (url) => Slugger.slug(url);
 
@@ -52,7 +55,7 @@ export const scrollToTarget = (target, offsetHeight = 0) => {
 };
 
 export const openAccordionIfContainsAnchors = (anchor) => {
-  waitForElm(anchor).then((elm) => {
+  waitForElm(removeSpecialCharacters(anchor)).then((elm) => {
     if (elm.closest('.accordion')) {
       const comp = elm.closest('.accordion')?.querySelector('.title');
       if (!comp?.className?.includes('active')) {
