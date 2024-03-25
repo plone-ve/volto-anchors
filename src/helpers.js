@@ -15,10 +15,6 @@ export const serializeText = (text) => {
   return isArray(text) ? serializeNodes(text) : text;
 };
 
-function removeSpecialCharacters(str) {
-  return str.replace(/[^a-zA-Z0-9]/g, '');
-}
-
 export const toSlug = (url) => Slugger.slug(url);
 
 export const waitForElm = (selector) => {
@@ -54,8 +50,21 @@ export const scrollToTarget = (target, offsetHeight = 0) => {
   return;
 };
 
+const isValidSelector = (selector) => {
+  try {
+    document.createElement('div').querySelector(selector);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 export const openAccordionIfContainsAnchors = (anchor) => {
-  waitForElm(removeSpecialCharacters(anchor)).then((elm) => {
+  if (!isValidSelector(anchor)) {
+    console.error('Invalid selector:', anchor);
+    return;
+  }
+  waitForElm(anchor).then((elm) => {
     if (elm.closest('.accordion')) {
       const comp = elm.closest('.accordion')?.querySelector('.title');
       if (!comp?.className?.includes('active')) {
