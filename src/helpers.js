@@ -61,7 +61,6 @@ const isValidSelector = (selector) => {
 
 export const openAccordionIfContainsAnchors = (anchor) => {
   if (!isValidSelector(anchor)) {
-    console.error('Invalid selector:', anchor);
     return;
   }
   waitForElm(anchor).then((elm) => {
