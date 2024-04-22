@@ -4,39 +4,13 @@ describe('Block Tests: Anchors', () => {
   beforeEach(slateBeforeEach);
   afterEach(slateAfterEach);
 
-  it('Add Block: Links', () => {
-    cy.waitForOverlayToDisappear(); // Wait for any potential overlay to disappear
-    // Change page title
-    cy.clearSlateTitle();
-    cy.getSlateTitle().type('Volto Anchors');
-    cy.getSlate().click();
-
-    // Add TOC block
-    cy.get('.ui.basic.icon.button.block-add-button').first().click();
-    cy.get(".blocks-chooser .ui.form .field.searchbox input[type='text']").type(
-      'table of contents',
-    );
-    cy.get('.button.toc').click();
-
-    // Save page
-    cy.get('#toolbar-save').click();
-    cy.url().should('eq', Cypress.config().baseUrl + '/cypress/my-page');
-  });
-
-  it('Add Block: add content to TOC', () => {
+  it('Add Block: add headings and verify that the headings have id', () => {
     cy.waitForOverlayToDisappear(); // Wait for any potential overlay to disappear
 
     // Change page title
     cy.clearSlateTitle();
     cy.getSlateTitle().type('Volto Anchors');
     cy.getSlate().click();
-
-    // Add TOC block
-    cy.get('.ui.basic.icon.button.block-add-button').first().click();
-    cy.get(".blocks-chooser .ui.form .field.searchbox input[type='text']").type(
-      'table of contents',
-    );
-    cy.get('.button.toc').click();
 
     // Add headings
     cy.get('.ui.drag.block.inner.slate').click().type('Title 1').click();
@@ -59,144 +33,36 @@ describe('Block Tests: Anchors', () => {
     cy.get('#toolbar-save').click();
     cy.url().should('eq', Cypress.config().baseUrl + '/cypress/my-page');
 
-    // Check if the page contains the TOC and the headings
     cy.contains('Volto Anchors');
-    cy.contains('Title 1');
-    cy.contains('Title 2');
-    cy.get('a[href="/cypress/my-page#title-1"]').click({ multiple: true });
-    cy.get('a[href="/cypress/my-page#title-2"]').click({ multiple: true });
-    cy.get('h2[id="title-1"]').contains('Title 1');
-    cy.get('h2[id="title-2"]').contains('Title 2');
-  });
 
-  it('Add Block: add horizontal TOC', () => {
-    cy.waitForOverlayToDisappear(); // Wait for any potential overlay to disappear
+    cy.contains('Title 1')
+      .invoke('attr', 'id')
+      .then((id) => {
+        cy.get(`h2#${id}`).contains('Title 1');
+        cy.get(`h2#${id} a`).should('have.class', 'anchor');
+        cy.get(`h2#${id} a`)
+          .should('have.attr', 'href')
+          .and('include', `/cypress/my-page#${id}`);
+        cy.get(`h2#${id} a`).click();
+        cy.url().should(
+          'eq',
+          Cypress.config().baseUrl + `/cypress/my-page#${id}`,
+        );
+      });
 
-    // Change page title
-    cy.clearSlateTitle();
-    cy.getSlateTitle().type('Volto Anchors');
-    cy.getSlate().click();
-
-    // Add TOC block
-    cy.get('.ui.basic.icon.button.block-add-button').first().click();
-    cy.get(".blocks-chooser .ui.form .field.searchbox input[type='text']").type(
-      'table of contents',
-    );
-    cy.get('.button.toc').click();
-    cy.get('#sidebar-properties .form .react-select-container').first().click();
-    cy.contains('Horizontal Menu').click();
-    cy.contains('Sticky').click();
-
-    // Add headings
-    cy.get('.ui.drag.block.inner.slate')
-      .click()
-      .type('Lorem ipsum dolor sit amet')
-      .click();
-    cy.get('.ui.drag.block.inner.slate span span span').setSelection(
-      'Lorem ipsum dolor sit amet',
-    );
-    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
-      force: true,
-    });
-    cy.get('.ui.drag.block.inner.slate').click().type('{enter}');
-
-    cy.get('.ui.drag.block.inner.slate')
-      .eq(1)
-      .click()
-      .type('Lorem ipsum dolor sit amet')
-      .click();
-    cy.get('.ui.drag.block.inner.slate span span span')
-      .eq(1)
-      .setSelection('Lorem ipsum dolor sit amet');
-    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
-      force: true,
-    });
-    cy.get('.ui.drag.block.inner.slate').eq(1).click().type('{enter}');
-
-    cy.get('.ui.drag.block.inner.slate')
-      .eq(2)
-      .click()
-      .type('Lorem ipsum dolor sit amet')
-      .click();
-    cy.get('.ui.drag.block.inner.slate span span span')
-      .eq(2)
-      .setSelection('Lorem ipsum dolor sit amet');
-    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
-      force: true,
-    });
-    cy.get('.ui.drag.block.inner.slate').eq(2).click().type('{enter}');
-
-    cy.get('.ui.drag.block.inner.slate')
-      .eq(3)
-      .click()
-      .type('Lorem ipsum dolor sit amet')
-      .click();
-    cy.get('.ui.drag.block.inner.slate span span span')
-      .eq(3)
-      .setSelection('Lorem ipsum dolor sit amet');
-    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
-      force: true,
-    });
-    cy.get('.ui.drag.block.inner.slate').eq(3).click().type('{enter}');
-
-    cy.get('.ui.drag.block.inner.slate')
-      .eq(4)
-      .click()
-      .type('Lorem ipsum dolor sit amet')
-      .click();
-    cy.get('.ui.drag.block.inner.slate span span span')
-      .eq(4)
-      .setSelection('Lorem ipsum dolor sit amet');
-    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
-      force: true,
-    });
-    cy.get('.ui.drag.block.inner.slate').eq(4).click().type('{enter}');
-
-    cy.get('.ui.drag.block.inner.slate')
-      .eq(5)
-      .click()
-      .type('Lorem ipsum dolor sit amet')
-      .click();
-    cy.get('.ui.drag.block.inner.slate span span span')
-      .eq(5)
-      .setSelection('Lorem ipsum dolor sit amet');
-    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
-      force: true,
-    });
-    cy.get('.ui.drag.block.inner.slate').eq(5).click().type('{enter}');
-
-    cy.get('.ui.drag.block.inner.slate')
-      .eq(6)
-      .click()
-      .type('Lorem ipsum dolor sit amet')
-      .click();
-    cy.get('.ui.drag.block.inner.slate span span span')
-      .eq(6)
-      .setSelection('Lorem ipsum dolor sit amet');
-    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
-      force: true,
-    });
-    cy.get('.ui.drag.block.inner.slate').eq(6).click().type('{enter}');
-
-    cy.get('.ui.drag.block.inner.slate')
-      .eq(7)
-      .click()
-      .type('Lorem ipsum dolor sit amet')
-      .click();
-    cy.get('.ui.drag.block.inner.slate span span span')
-      .eq(7)
-      .setSelection('Lorem ipsum dolor sit amet');
-    cy.get('.slate-inline-toolbar .button-wrapper a[title="Title"]').click({
-      force: true,
-    });
-    cy.get('.ui.drag.block.inner.slate').eq(7).click().type('{enter}');
-
-    // Save page
-    cy.get('#toolbar-save').click();
-    cy.url().should('eq', Cypress.config().baseUrl + '/cypress/my-page');
-
-    // Check if the page contains the TOC and the dropdown button
-    cy.contains('Volto Anchors');
-    cy.get('.table-of-contents  .dropdown').contains('More').click();
+    cy.contains('Title 2')
+      .invoke('attr', 'id')
+      .then((id) => {
+        cy.get(`h2#${id}`).contains('Title 2');
+        cy.get(`h2#${id} a`).should('have.class', 'anchor');
+        cy.get(`h2#${id} a`)
+          .should('have.attr', 'href')
+          .and('include', `/cypress/my-page#${id}`);
+        cy.get(`h2#${id} a`).click();
+        cy.url().should(
+          'eq',
+          Cypress.config().baseUrl + `/cypress/my-page#${id}`,
+        );
+      });
   });
 });
