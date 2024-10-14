@@ -108,4 +108,6 @@ Or run it:
   ```
 
 
-## Internationalization (i18n) and localization (l10n)\n\nSee [Internationalization](https://6.docs.plone.org/volto/development/i18n.html) and [Translate Volto](https://6.docs.plone.org/i18n-l10n/contributing-translations.html#translate-volto).
+## Internationalization (i18n) and localization (l10n)
+
+See [Internationalization](https://6.docs.plone.org/volto/development/i18n.html) and [Translate Volto](https://6.docs.plone.org/i18n-l10n/contributing-translations.html#translate-volto).
